@@ -60,17 +60,39 @@ for index in sort_index:
     name_count_sorted.append(name_count[index])
     name_sorted.append(name[index])
 
-print(name_count_sorted)
-print(name_sorted)
+# print(name_count_sorted)
+# print(len(name_sorted))
+
+
 # draw barchart
+#plot barchart
+import matplotlib.pyplot as plt
+import numpy as np
 
+num = 30
 
+x = np.arange(num)
+y = np.arange(num)
 
+figure, axis = plt.subplots()
 
+#plot the barchart using 2 list, high of the bar
+plt.bar(x, name_count_sorted[:num])
+#change horizontal category name
+plt.xticks(x, name_sorted[:num])
+#set limit to vertical axis
+axis.set_ylim(0,30000)
 
+plt.ylabel("Number of students per last name")
+plt.xlabel("Last name")
+plt.title("Top " + str(num) + " most popular students' lastname")
 
+# Draw number of students on top of each bar
+# label is the number upper the bar
+rects = axis.patches
+label = name_count_sorted
+for rect, label in zip(rects, label):
+    height = rect.get_height()
+    axis.text(rect.get_x() + rect.get_width() / 2, height , label, ha='center', va='bottom')
 
-
-
-
-
+plt.show()
